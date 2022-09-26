@@ -63,4 +63,11 @@ public class CourtController {
     }
     // PathVariable Long courtId 받아서 court를 다시 찾는게 낫나?
     // request body로 받는게 낫겠지?
+
+    @PostMapping("/api/court/delete")
+    public Court deleteCourt(@RequestBody Court court) {
+        System.out.println("court = " + court);
+        courtService.removeCourt(court);
+        return court;
+    }
 }

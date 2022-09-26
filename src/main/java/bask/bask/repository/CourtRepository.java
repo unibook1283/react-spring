@@ -36,4 +36,9 @@ public class CourtRepository {
                 .setParameter("name", name)
                 .getResultList();
     }
+
+    public void delete(Court court) {
+//        em.remove(court);
+        em.remove(em.contains(court) ? court : em.merge(court));
+    }
 }

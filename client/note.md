@@ -15,3 +15,6 @@ return (
 )
 ```
 - loading이라는 값 말고 다른걸로도 할 수 있겠네. if문을 적절히 써서.
+
+### 9/24
+- http delete method에 body를 보내고 있었다. 전에는 get에 그랬던 것 같은데.

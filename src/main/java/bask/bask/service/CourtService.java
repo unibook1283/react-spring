@@ -28,4 +28,8 @@ public class CourtService {
         return courtRepository.findOne(courtId);
     }
 
+    public Long removeCourt(Court court) {
+        courtRepository.delete(court);
+        return court.getId();
+    }
 }

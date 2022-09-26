@@ -4,7 +4,7 @@ import {
   Route,
   Routes
 } from 'react-router-dom'
-import MembersPage from './components/MembersPage/MembersPage'
+import MembersPage from './components/views/MembersPage/MembersPage'
 import CourtsPage from './components/views/CourtPage/CourtsPage'
 import EditCourtPage from './components/views/CourtPage/EditCourtPage'
 import NewCourtPage from './components/views/CourtPage/NewCourtPage'
