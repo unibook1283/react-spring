@@ -27,7 +27,7 @@ function LandingPage() {
 		<br/>
 		<Link to='/courts'>코트 목록</Link>
 		<br/>
-		코트 삭제 마저 만들자. navbar 만들어보자.
+		navbar 만들어보자.
 		<br/>
 		그리고 스프링 시큐리티 하던 하자.
 		</PageWrap>

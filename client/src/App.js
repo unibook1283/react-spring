@@ -11,21 +11,25 @@ import NewCourtPage from './components/views/CourtPage/NewCourtPage'
 import LandingPage from './components/views/LandingPage/LandingPage'
 import LoginPage from './components/views/LoginPage/LoginPage'
 import RegisterPage from './components/views/RegisterPage/RegisterPage'
+import NavBar from './components/views/NavBar/NavBar'
 
 function App() {
-  return (
-   <BrowserRouter>
-    <Routes>
-      <Route exact path="/" element = {<LandingPage/>}/>
-      <Route exact path="/login" element = {<LoginPage/>}/>
-      <Route exact path="/register" element = {<RegisterPage/>}/>
-      <Route exact path="/members" element = {<MembersPage/>}/>
-      <Route exact path="/courts" element = {<CourtsPage/>}/>
-      <Route exact path="/courts/new" element = {<NewCourtPage/>}/>
-      <Route exact path="/courts/edit/:id" element = {<EditCourtPage/>}/>
-    </Routes>
-   </BrowserRouter>
-  )
+	return (
+	<BrowserRouter>
+		<NavBar/>
+		<div>
+			<Routes>
+			<Route exact path="/" element = {<LandingPage/>}/>
+			<Route exact path="/login" element = {<LoginPage/>}/>
+			<Route exact path="/register" element = {<RegisterPage/>}/>
+			<Route exact path="/members" element = {<MembersPage/>}/>
+			<Route exact path="/courts" element = {<CourtsPage/>}/>
+			<Route exact path="/courts/new" element = {<NewCourtPage/>}/>
+			<Route exact path="/courts/edit/:id" element = {<EditCourtPage/>}/>
+			</Routes>
+		</div>
+	</BrowserRouter>
+	)
 }
 
 export default App
