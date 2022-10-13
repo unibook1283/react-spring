@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -26,13 +27,14 @@ public class MemberServiceTest {
     MemberRepository memberRepository;
 
     @Test
+//    @Commit
     public void 회원가입() {
 
         Member member = new Member();
-        member.setName("savd");
+        member.setName("qwer");
 
         Long memberId = memberService.join(member);
-
+        System.out.println("memberId = " + memberId);
         Member findMember = memberRepository.findOne(memberId);
 
 //        System.out.println("findMember.getName() = " + findMember.getName());

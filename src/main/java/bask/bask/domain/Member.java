@@ -18,6 +18,7 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Favorite> favorites = new ArrayList<Favorite>();
 
+    private String loginId;
     private String name;
     private String email;
     private String phoneNumber;

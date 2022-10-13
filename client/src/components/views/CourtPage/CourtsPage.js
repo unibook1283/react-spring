@@ -20,7 +20,7 @@ function CourtsPage() {
 	useEffect(() => {
 		axios.get('/api/court')
 		.then(result => setCourts(result.data))
-	}, [courts])
+	}, [])
 
 	const editHandler = (court) => {
 		navigate('/courts/edit/' + court.id)
@@ -28,12 +28,8 @@ function CourtsPage() {
 
 	const removeHandler = async (elem) => {
 		const deleted = await axios.post('/api/court/delete', elem)
-		console.log(deleted.data)
-		setCourts(courts.filter(court => court !== deleted.data))
+		setCourts(courts.filter(court => court.id !== deleted.data.id))
 		alert('삭제')
-		// .then({
-		// 	setCourts(courts.filter(court => court !== deleted.payload))
-		// })
 	}
 	
 	return (

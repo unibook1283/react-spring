@@ -42,15 +42,6 @@ public class CourtController {
 
     @PatchMapping("/api/court/{courtId}")
     public void updateCourt(@PathVariable Long courtId, @RequestBody Court court) {
-//        Court findCourt = courtService.findOne(courtId);
-//        System.out.println("findCourt.getName() = " + findCourt.getName());
-//        findCourt.setName(court.getName());
-//        findCourt.setAddressName(court.getAddressName());
-//        findCourt.setRoadAddressName(court.getRoadAddressName());
-//        findCourt.setFloor(court.getFloor());
-//        findCourt.setHeight(court.getHeight());
-//        findCourt.setGoalPosts(court.getGoalPosts());
-
         Court newCourt = new Court();
         newCourt.setId(courtId);
         newCourt.setName(court.getName());

@@ -38,7 +38,6 @@ public class CourtRepository {
     }
 
     public void delete(Court court) {
-//        em.remove(court);
         em.remove(em.contains(court) ? court : em.merge(court));
     }
 }
