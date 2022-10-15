@@ -1,4 +1,5 @@
 import React from 'react'
+import Auth from '../../../hoc/auth'
 
 function MembersPage() {
   return (
@@ -6,4 +7,4 @@ function MembersPage() {
   )
 }
 
-export default MembersPage
+export default Auth(MembersPage, true)

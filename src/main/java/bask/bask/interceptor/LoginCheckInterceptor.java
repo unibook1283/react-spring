@@ -1,6 +1,8 @@
 package bask.bask.interceptor;
 
 import bask.bask.controller.SessionConst;
+import bask.bask.dto.AuthDto;
+import bask.bask.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -25,9 +27,11 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             /**
              * 에러 처리
              */
+            throw new UnauthorizedException("미인증 사용자 요청");
 
-            return false;
+//            return false;
         }
+
         return true;
     }
 }

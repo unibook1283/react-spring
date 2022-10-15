@@ -33,9 +33,9 @@ public class MemberRepository {
                 .getResultList();
     }
 
-    public Optional<Member> findByLoginId(String loginId) {
+    public Optional<Member> findByEmail(String email) {
         return findAll().stream()
-                .filter(m -> m.getLoginId().equals(loginId))
+                .filter(m -> m.getEmail().equals(email))
                 .findFirst();
     }
 }

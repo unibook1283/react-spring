@@ -4,6 +4,7 @@ import { TextField, Button } from '@mui/material'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import Auth from '../../../hoc/auth'
 
 const PageWrap = styled.div`
   	display: flex;
@@ -53,15 +54,22 @@ function RegisterPage() {
 		if (password !== confirmPassword) {
 			return alert('비밀번호와 비밀번호 확인은 같아야 합니다.')
 		}
+		if (password.length < 8) {
+			return alert('비밀번호는 8글자 이상이어야 합니다.')
+		}
 		let body = {
 			name,
 			email,
 			phoneNumber,
 			password
 		}
-		const response = await axios.post('/api/members/new', body)
-		console.log(response)
-		navigate('/login')
+		try {
+			await axios.post('/api/members/new', body)
+			navigate('/login')
+		} catch (e) {
+			// console.log(e)
+			alert(e.response.data.message)
+		}
 	}
 
 	return (
@@ -77,6 +85,6 @@ function RegisterPage() {
 		</LoginWrap>
 		</PageWrap>
 	)
-	}
+}
 
-	export default RegisterPage
+export default Auth(RegisterPage, false)

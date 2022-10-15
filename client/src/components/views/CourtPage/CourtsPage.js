@@ -3,6 +3,7 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import Auth from '../../../hoc/auth'
 
 const PageWrap = styled.div`
     display: flex;
@@ -74,4 +75,4 @@ function CourtsPage() {
 	)
 }
 
-export default CourtsPage
+export default Auth(CourtsPage, true)

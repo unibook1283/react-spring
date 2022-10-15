@@ -8,6 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Auth from '../../../hoc/auth'
 
 const PageWrap = styled.div`
     display: flex;
@@ -116,4 +117,4 @@ function NewCourtPage() {
 }
 
 
-export default NewCourtPage
+export default Auth(NewCourtPage, true)
