@@ -4,7 +4,7 @@ import { TextField, Button } from '@mui/material'
 import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import Auth from '../../../hoc/auth'
+import Auth from '../../hoc/auth'
 
 const PageWrap = styled.div`
   	display: flex;

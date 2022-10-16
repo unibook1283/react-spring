@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import Auth from '../../../hoc/auth'
+import Auth from '../../hoc/auth'
 
 const PageWrap = styled.div`
 	display: flex;

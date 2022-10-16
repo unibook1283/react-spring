@@ -36,3 +36,6 @@ filter 부분을 보면 state인 courts배열의 court 객체와 server로부터
 ```
 이 전에는 state가 바뀔 때마다 useEffect에서 server에 get 요청을 받아와서 setCourt하는 방식으로 했었는데, 무한루프를 돌면서 받아왔었다.
 잘 해결한듯.
+
+### 10/15
+- member별 court favorite 만드는데도 redux가 필요해보이는데. user 정보를 가져오려면.

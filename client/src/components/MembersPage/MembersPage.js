@@ -1,5 +1,5 @@
 import React from 'react'
-import Auth from '../../../hoc/auth'
+import Auth from '../../hoc/auth'
 
 function MembersPage() {
   return (
