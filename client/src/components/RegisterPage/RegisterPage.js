@@ -63,6 +63,7 @@ function RegisterPage() {
 			phoneNumber,
 			password
 		}
+		//qwer
 		try {
 			await axios.post('/api/members/new', body)
 			navigate('/login')
