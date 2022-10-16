@@ -29,7 +29,7 @@ public class MemberController {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     @PostMapping("/api/members/new")
-    public Member create(@Valid @RequestBody MemberForm memberForm) {
+    public Long create(@Valid @RequestBody MemberForm memberForm) {
 
         Member member = memberForm.toMember();
         System.out.println("member.getName() = " + member.getName());
@@ -37,7 +37,7 @@ public class MemberController {
         System.out.println("member.getPhoneNumber() = " + member.getPhoneNumber());
         System.out.println("member.getPassword() = " + member.getPassword());
         memberService.join(member);
-        return member;
+        return member.getId();
     }
 
     @GetMapping("/api/members/auth")

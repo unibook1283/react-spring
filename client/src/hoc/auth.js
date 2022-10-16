@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { auth } from '../_actions/member_action'
 
 export default function (SpecificComponent, option, adminRoute = null) {
     //option:
@@ -12,12 +13,13 @@ export default function (SpecificComponent, option, adminRoute = null) {
 
     function AuthenticationCheck() {
         const navigate = useNavigate()
+        const dispatch = useDispatch()
 
         useEffect(() => {
-            axios.get("/api/members/auth")
+            dispatch(auth())
                 .then((res) => {
                     // console.log(res)
-                    if (res.data.isAuth) {
+                    if (res.payload.isAuth) {
                         // 로그인 한 유저
                         if (!option) {
                             navigate('/')

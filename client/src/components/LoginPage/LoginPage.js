@@ -5,6 +5,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Auth from '../../hoc/auth'
+import { useDispatch } from 'react-redux'
+import { loginMember } from '../../_actions/member_action'
 
 const PageWrap = styled.div`
   	display: flex;
@@ -23,6 +25,7 @@ const LoginWrap = styled.div`
 
 function LoginPage() {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -41,7 +44,7 @@ function LoginPage() {
 			password
 		}
 		try {
-			await axios.post('/api/login', body)
+			await dispatch(loginMember(body))
 			// console.log(response)
 			navigate('/')
 		} catch (e) {
@@ -54,8 +57,8 @@ function LoginPage() {
 		<PageWrap>
 		<h1>LoginPage</h1>
 		<LoginWrap>
-			<TextField fullWidth id="outlined-basic" type='email' margin="dense" label="이메일" variant="outlined" size="small" onChange={emailChanged} />
-			<TextField fullWidth id="outlined-basic" type='password' margin="dense" label="비밀번호" variant="outlined" size="small" onChange={passwordChanged} />
+			<TextField fullWidth type='email' margin="dense" label="이메일" variant="outlined" size="small" onChange={emailChanged} />
+			<TextField fullWidth type='password' margin="dense" label="비밀번호" variant="outlined" size="small" onChange={passwordChanged} />
 			<Button fullWidth margin="dense" variant="contained" sx={{ my: 2 }} onClick={loginHandler} >로그인</Button>
 		</LoginWrap>
 		</PageWrap>

@@ -5,6 +5,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Auth from '../../hoc/auth'
+import { useDispatch } from 'react-redux'
+import { registerMember } from '../../_actions/member_action'
 
 const PageWrap = styled.div`
   	display: flex;
@@ -23,6 +25,7 @@ const LoginWrap = styled.div`
 
 function RegisterPage() {
 	const navigate = useNavigate()
+	const dispatch = useDispatch()
 
 	const [name, setName] = useState('')
 	const [email, setEmail] = useState('')
@@ -63,9 +66,9 @@ function RegisterPage() {
 			phoneNumber,
 			password
 		}
-		//qwer
 		try {
-			await axios.post('/api/members/new', body)
+			await dispatch(registerMember(body))
+			alert('회원가입 완료')
 			navigate('/login')
 		} catch (e) {
 			// console.log(e)
@@ -77,11 +80,11 @@ function RegisterPage() {
 		<PageWrap>
 		<h1>RegisterPage</h1>
 		<LoginWrap>
-			<TextField fullWidth id="outlined-basic" margin="dense" label="이름" variant="outlined" size="small" onChange={nameChanged} />
-			<TextField fullWidth id="outlined-basic" type='email' margin="dense" label="이메일" variant="outlined" size="small" onChange={emailChanged} />
-			<TextField fullWidth id="outlined-basic" type='tel' margin="dense" label="전화번호" variant="outlined" size="small" onChange={phoneNumberChanged} />
-			<TextField fullWidth id="outlined-basic" type='password' margin="dense" label="비밀번호" variant="outlined" size="small" onChange={passwordChanged} />
-			<TextField fullWidth id="outlined-basic" type='password' margin="dense" label="비밀번호 확인" variant="outlined" size="small" onChange={confirmPasswordChanged} />
+			<TextField fullWidth margin="dense" label="이름" variant="outlined" size="small" onChange={nameChanged} />
+			<TextField fullWidth type='email' margin="dense" label="이메일" variant="outlined" size="small" onChange={emailChanged} />
+			<TextField fullWidth type='tel' margin="dense" label="전화번호" variant="outlined" size="small" onChange={phoneNumberChanged} />
+			<TextField fullWidth type='password' margin="dense" label="비밀번호" variant="outlined" size="small" onChange={passwordChanged} />
+			<TextField fullWidth type='password' margin="dense" label="비밀번호 확인" variant="outlined" size="small" onChange={confirmPasswordChanged} />
 			<Button fullWidth margin="dense" variant="contained" sx={{ my: 2 }} onClick={registerHandler} >회원 가입</Button>
 		</LoginWrap>
 		</PageWrap>
