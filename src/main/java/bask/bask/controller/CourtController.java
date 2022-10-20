@@ -44,7 +44,7 @@ public class CourtController {
     public void updateCourt(@PathVariable Long courtId, @RequestBody Court court) {
         Court newCourt = new Court();
         newCourt.setId(courtId);
-        newCourt.setName(court.getName());
+        newCourt.setPlaceName(court.getPlaceName());
         newCourt.setAddressName(court.getAddressName());
         newCourt.setRoadAddressName(court.getRoadAddressName());
         newCourt.setFloor(court.getFloor());

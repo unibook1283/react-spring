@@ -24,7 +24,7 @@ public class HomeController {
     @GetMapping("/api/hello")
     public String apihello() {
         Court court = new Court();
-        court.setName("lkj");
+//        court.setName("lkj");
         em.persist(court);
         em.flush();
         em.close();

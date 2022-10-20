@@ -17,6 +17,13 @@ public class ExControllerAdvice {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler
+    public ErrorResult loginExHandler(IllegalStateException e) {
+        log.error("[exceptionHandler] ex", e);
+        return new ErrorResult("ILL-EX", e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
     public ErrorResult unauthorizedExHandler(UnauthorizedException e) {
         log.error("[exceptionHandler] ex", e);
         return new ErrorResult("UNAUTH-EX", e.getMessage());
