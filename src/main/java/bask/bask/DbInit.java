@@ -31,7 +31,7 @@ public class DbInit {
                     .get()
                     .uri("https://dapi.kakao.com/v2/local/search/keyword.json?query=농구장&page=" + page_index)
                     .header("Authorization", "KakaoAK " + kakao_apikey);   // 인증키 숨겨
-            System.out.println("page_index = " + page_index);
+            System.out.println("https://dapi.kakao.com/v2/local/search/keyword.json?query=농구장&page=" + page_index);
 
             Mono<JsonResponse> objectMono = authorization.accept(MediaType.APPLICATION_JSON)
                     .retrieve()

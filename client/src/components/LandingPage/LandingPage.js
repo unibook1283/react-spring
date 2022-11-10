@@ -28,6 +28,8 @@ function LandingPage() {
 		<br/>
 		<Link to='/courts'>코트 목록</Link>
 		<br/>
+		<Link to='/map'>map</Link>
+		<br />
 		navbar 만들어보자.
 		<br/>
 		그리고 스프링 시큐리티 하던 하자.

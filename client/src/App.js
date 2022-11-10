@@ -12,6 +12,7 @@ import LandingPage from './components/LandingPage/LandingPage'
 import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import NavBar from './components/NavBar/NavBar'
+import MapPage from './components/MapPage/MapPage'
 
 function App() {
 	return (
@@ -26,6 +27,9 @@ function App() {
 			<Route exact path="/courts" element = {<CourtsPage/>}/>
 			<Route exact path="/courts/new" element = {<NewCourtPage/>}/>
 			<Route exact path="/courts/edit/:id" element = {<EditCourtPage/>}/>
+			<Route exact path="/map" element = {<MapPage/>}/>
+            <Route exact path="/map/:address" element={<MapPage />} />
+            <Route exact path="/map/:address/:id" element={<MapPage />} />
 			</Routes>
 		</div>
 	</BrowserRouter>

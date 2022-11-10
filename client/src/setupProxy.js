@@ -8,4 +8,11 @@ module.exports = function(app) {
             changeOrigin: true
         })
     )
+    app.use(
+        '/map-geocode',
+        createProxyMiddleware({
+            target: 'https://naveropenapi.apigw.ntruss.com',
+            changeOrigin: true
+        })
+    )
 }
