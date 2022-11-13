@@ -40,4 +40,17 @@ public class CourtRepository {
     public void delete(Court court) {
         em.remove(em.contains(court) ? court : em.merge(court));
     }
+
+    public List<Court> findByAddressName(String addressName) {
+        return em.createQuery("select c from Court c where c.addressName = :addressName", Court.class)
+                .setParameter("addressName", addressName)
+                .getResultList();
+    }
+
+    public List<Court> findByDong(String dong) {
+        return em.createQuery("select c from Court c where c.addressName like :dong", Court.class)
+                .setParameter("dong", "%"+dong+"%")
+                .getResultList();
+    }
+
 }

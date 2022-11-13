@@ -6,7 +6,10 @@ import { TextField, Button, Link, Modal, Box } from '@mui/material'
 import { useParams, useNavigate } from 'react-router-dom'
 import Auth from '../../hoc/auth'
 import { useDispatch } from 'react-redux'
-import Map from './Sections/Map'
+import { addFavorite } from '../../_actions/favorite_action'
+import NewMap from './Sections/NewMap'
+import Request from './Sections/Request'
+import { getSearchedCourt } from '../../_actions/court_action'
 
 const PageWrap = styled.div`
     display: flex;
@@ -55,6 +58,18 @@ const RequestCourt = styled.div`
     align-self: bottom;
 `
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
 function MapPage() {
     let { address, id } = useParams()
     const navigate = useNavigate()
@@ -91,26 +106,85 @@ function MapPage() {
         } 
     }
 
-    const searchTextChanged = (e) => {
+    async function fetchKakaoCourts () {   // 이것도 redux로 해야되나?
+        let url = `https://dapi.kakao.com/v2/local/search/keyword.json?query=농구장&y=${position.lat}&x=${position.lng}&size=15&page=1&radius=4000`
+        try {
+            const response = await axios.get(url, {
+                headers: {
+                    'Authorization': `KakaoAK ${process.env.REACT_APP_KAKAO_API_KEY}`
+            }
+            })
+            //setData(response.data.documents)    // module화 하고싶은데 setData를 어찌 처리할지 고민중
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    useEffect(() => {
+        geocode(address)
+    }, [address])
+
+    useEffect(() => {
+        fetchKakaoCourts()
+    }, [position])
+    
+    const searchHandler = (e) => {
         setSearchText(e.target.value)
     }
 
-    const searchHandler = (e) => {
+    const moveHandler = () => {
         navigate(`/map/${searchText}`)
+        fetchDbCourts()
     }
     
-    useEffect(() => {
-        geocode("성수동")
-    }, [])
+    const favoriteHandler = async () => {
+        // 이것좀 깔끔하게 해보자
+        delete detail.category_group_code
+        delete detail.category_group_name
+        delete detail.category_name
+        delete detail.distance
+        delete detail.phone
+        delete detail.place_url
+        try {
+            const res = await dispatch(addFavorite(detail))
+            if (res.payload.isAuth === false) {
+                alert(res.payload.errorMessage)
+                return
+            }
+            alert('즐겨찾기에 추가되었습니다.')
+        } catch (e) {
+            alert(e.response.data.errorMessage)
+        }
+    }
+
     
+    const fetchDbCourts = async () => {
+        console.log(searchText)
+        try {
+            // const res = await axios.get('/api/court')
+            // console.log(res.data)
+            // setDbc(res.data)
+
+            const dbCourts = await dispatch(getSearchedCourt({searchText: searchText}))
+            console.log(dbCourts)
+            console.log(dbCourts.payload)
+            setDbc(dbCourts.payload)
+        } catch (e) {
+            alert('Error')
+        }
+    }
+
+    useEffect(() => {
+        fetchDbCourts()
+    }, [])
 
   return (
     <PageWrap>
         <InfoWrap>
             <MainInfo>
                 <Search>
-                    <TextField fullWidth label='동으로 검색 ex) 성수동' size='small' onChange={searchTextChanged} />
-                    <Button variant='contained' sx={{ml: 1}} onClick={searchHandler}>검색</Button>
+                    <TextField fullWidth label='동으로 검색 ex) 성수동' size='small' onChange={searchHandler} />
+                    <Button variant='contained' sx={{ml: 1}} onClick={moveHandler} >이동</Button>
                 </Search>
                 <HeaderInfo>
                     <PlaceName>{id && detail.place_name}</PlaceName>
@@ -118,14 +192,14 @@ function MapPage() {
                 </HeaderInfo>
                 {detail.id && (
                     <Buttons>
-                        {/* <Button fullWidth href={detail.place_url} variant='contained' sx={{ mx: 2 }} >카카오맵에서 검색</Button> */}
-                        <Button fullWidth variant='contained' sx={{ mx: 2, my: 1 }} >즐겨찾기에 추가</Button>
+                        <Button fullWidth href={detail.place_url} variant='contained' sx={{ mx: 2 }} >카카오맵에서 검색</Button>
+                        <Button fullWidth variant='contained' sx={{ mx: 2, my: 1 }} onClick={favoriteHandler} >즐겨찾기에 추가</Button>
                     </Buttons>
                 )}
             </MainInfo>
 
             
-            {/* <RequestCourt>
+            <RequestCourt>
                 <Button onClick={() => setOpen(true)}>찾으시는 코트가 없나요?</Button>
                 <Modal
                     open={open}
@@ -136,10 +210,10 @@ function MapPage() {
                         <Request setOpen={setOpen} newCourt={newCourt} />
                     </Box>
                 </Modal>
-            </RequestCourt> */}
+            </RequestCourt>
             
         </InfoWrap>
-        <Map />
+        <NewMap position={position} data={data} setDetail={setDetail} searchText={searchText} navigate={navigate} newCourt={newCourt} setNewCourt={setNewCourt} dispatch={dispatch} dbc={dbc} />
     </PageWrap>
   )
 }

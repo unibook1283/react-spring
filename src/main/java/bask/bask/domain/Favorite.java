@@ -1,12 +1,12 @@
 package bask.bask.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Favorite {
 
     @Id @GeneratedValue

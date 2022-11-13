@@ -32,4 +32,16 @@ public class CourtService {
         courtRepository.delete(court);
         return court.getId();
     }
+
+    public Boolean isDuplicate(Court court) {
+        return !courtRepository.findByAddressName(court.getAddressName()).isEmpty();
+    }
+
+    public List<Court> findCourtsByAddressName(String addressName) {
+        return courtRepository.findByAddressName(addressName);
+    }
+
+    public List<Court> findCourtsByDong(String dong) {
+        return courtRepository.findByDong(dong);
+    }
 }

@@ -1,7 +1,6 @@
 package bask.bask.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -12,11 +11,9 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor
 public class Member {
 
-    public Member() {
-
-    }
     public Member(String name, String email, String phoneNumber, String password) {
         this.name = name;
         this.email = email;

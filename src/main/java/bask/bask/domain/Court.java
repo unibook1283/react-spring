@@ -1,8 +1,6 @@
 package bask.bask.domain;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,6 +28,7 @@ public class Court {
     @OneToMany(mappedBy = "court")
     private List<Favorite> favorites = new ArrayList<Favorite>();
 
+    @Column(name = "PLACE_NAME")
     private String placeName;
 
     @Column(name = "ADDRESS_NAME")

@@ -29,8 +29,12 @@ public class CourtController {
         Long id = courtService.saveCourt(court);
     }
 
+    // 이렇게 같이 하는거 괜찮나?
     @GetMapping("/api/court")
-    public List<Court> getAllCourts() {
+    public List<Court> getCourts(@RequestParam(value = "dong", required = false) String dong) {
+        System.out.println("dong = " + dong);
+        if (dong != null) return courtService.findCourtsByDong(dong);
+
         List<Court> courts = courtService.findCourts();
         return courts;
     }
@@ -61,4 +65,5 @@ public class CourtController {
         courtService.removeCourt(court);
         return court;
     }
+
 }
