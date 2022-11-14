@@ -21,7 +21,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
                     // console.log(res)
                     if (res.payload.isAuth) {
                         // 로그인 한 유저
-                        if (!option) {
+                        if (option === false) {
                             navigate('/')
                         }
                     } else {

@@ -14,6 +14,7 @@ export default class App extends React.Component {
         // const navermaps = window.naver.maps;
 
         const markerClicked = (elem) => {
+            console.log(elem)
             setDetail(elem)
             navigate(`/map/${searchText}/${elem.id}`)
             // console.log(this.mapRef.getCenterPoint());
@@ -71,7 +72,8 @@ export default class App extends React.Component {
                             <Marker
                                 key={index}
                                 position={{ lat: elem.y, lng: elem.x }}
-                                onClick={() => dbcMarkerClicked(elem)}
+                                // onClick={() => dbcMarkerClicked(elem)}
+                                onClick={() => markerClicked(elem)}
                             />
                         )
                     })}

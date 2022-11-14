@@ -26,7 +26,8 @@ export function deleteFavorite(dataToSubmit) {
 }
 
 export function addFavorite(dataToSubmit) {
-    const request = axios.post('/api/favorites/add', dataToSubmit)
+    console.log(dataToSubmit)
+    const request = axios.post('/api/favorites/' + dataToSubmit + '/add', dataToSubmit)
         .then(response => response.data)
 
     return {

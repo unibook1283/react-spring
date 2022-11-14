@@ -23,7 +23,7 @@ public class DbInit {
     @Value("${kakao-api-key}")
     private String kakao_apikey;
 
-    @PostConstruct
+//    @PostConstruct
     private void postConstruct() {
         double d=0.025;
         for (double y=37.4574; y<37.6847; y+=d) {

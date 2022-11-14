@@ -23,6 +23,7 @@ public class Court {
     }
 
     @Id @GeneratedValue
+    @Column(name = "COURT_ID")
     private Long id;
 
     @OneToMany(mappedBy = "court")

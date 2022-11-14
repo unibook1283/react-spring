@@ -41,16 +41,4 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
-    // 이거 맞나? 여기(service)다 쓰는거 어때?
-    public void addFavoriteCourt(Long memberId, Long courtId) {
-        Member member = memberRepository.findOne(memberId);
-        Court court = courtRepository.findOne(courtId);
-
-        Favorite favorite = new Favorite();
-        favorite.setMember(member);
-        favorite.setCourt(court);
-
-        member.getFavorites().add(favorite);
-        court.getFavorites().add(favorite);
-    }
 }

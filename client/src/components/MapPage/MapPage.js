@@ -139,21 +139,20 @@ function MapPage() {
     
     const favoriteHandler = async () => {
         // 이것좀 깔끔하게 해보자
-        delete detail.category_group_code
-        delete detail.category_group_name
-        delete detail.category_name
-        delete detail.distance
-        delete detail.phone
-        delete detail.place_url
+        // delete detail.category_group_code
+        // delete detail.category_group_name
+        // delete detail.category_name
+        // delete detail.distance
+        // delete detail.phone
+        // delete detail.place_url
+        console.log(detail)
         try {
-            const res = await dispatch(addFavorite(detail))
-            if (res.payload.isAuth === false) {
-                alert(res.payload.errorMessage)
-                return
-            }
+            const res = await dispatch(addFavorite(detail.id))
+            console.log(res)
             alert('즐겨찾기에 추가되었습니다.')
         } catch (e) {
-            alert(e.response.data.errorMessage)
+            console.log(e)
+            alert(e.response.data.message)
         }
     }
 
@@ -187,12 +186,12 @@ function MapPage() {
                     <Button variant='contained' sx={{ml: 1}} onClick={moveHandler} >이동</Button>
                 </Search>
                 <HeaderInfo>
-                    <PlaceName>{id && detail.place_name}</PlaceName>
-                    <RoadAddressName>{id && detail.road_address_name}</RoadAddressName>
+                    <PlaceName>{id && detail.placeName}</PlaceName>
+                    <RoadAddressName>{id && detail.roadAddressName}</RoadAddressName>
                 </HeaderInfo>
                 {detail.id && (
                     <Buttons>
-                        <Button fullWidth href={detail.place_url} variant='contained' sx={{ mx: 2 }} >카카오맵에서 검색</Button>
+                        <Button fullWidth href={detail.placeUrl} variant='contained' sx={{ mx: 2 }} >카카오맵에서 검색</Button>
                         <Button fullWidth variant='contained' sx={{ mx: 2, my: 1 }} onClick={favoriteHandler} >즐겨찾기에 추가</Button>
                     </Buttons>
                 )}
