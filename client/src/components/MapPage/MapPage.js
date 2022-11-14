@@ -75,7 +75,6 @@ function MapPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const [data, setData] = useState([])
     const [searchText, setSearchText] = useState('성수동')
     const [position, setPosition] = useState({
         lat: 37.542108,
@@ -106,27 +105,9 @@ function MapPage() {
         } 
     }
 
-    async function fetchKakaoCourts () {   // 이것도 redux로 해야되나?
-        let url = `https://dapi.kakao.com/v2/local/search/keyword.json?query=농구장&y=${position.lat}&x=${position.lng}&size=15&page=1&radius=4000`
-        try {
-            const response = await axios.get(url, {
-                headers: {
-                    'Authorization': `KakaoAK ${process.env.REACT_APP_KAKAO_API_KEY}`
-            }
-            })
-            //setData(response.data.documents)    // module화 하고싶은데 setData를 어찌 처리할지 고민중
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     useEffect(() => {
         geocode(address)
     }, [address])
-
-    useEffect(() => {
-        fetchKakaoCourts()
-    }, [position])
     
     const searchHandler = (e) => {
         setSearchText(e.target.value)
@@ -138,17 +119,8 @@ function MapPage() {
     }
     
     const favoriteHandler = async () => {
-        // 이것좀 깔끔하게 해보자
-        // delete detail.category_group_code
-        // delete detail.category_group_name
-        // delete detail.category_name
-        // delete detail.distance
-        // delete detail.phone
-        // delete detail.place_url
-        console.log(detail)
         try {
             const res = await dispatch(addFavorite(detail.id))
-            console.log(res)
             alert('즐겨찾기에 추가되었습니다.')
         } catch (e) {
             console.log(e)
@@ -160,10 +132,6 @@ function MapPage() {
     const fetchDbCourts = async () => {
         console.log(searchText)
         try {
-            // const res = await axios.get('/api/court')
-            // console.log(res.data)
-            // setDbc(res.data)
-
             const dbCourts = await dispatch(getSearchedCourt({searchText: searchText}))
             console.log(dbCourts)
             console.log(dbCourts.payload)
@@ -212,7 +180,7 @@ function MapPage() {
             </RequestCourt>
             
         </InfoWrap>
-        <NewMap position={position} data={data} setDetail={setDetail} searchText={searchText} navigate={navigate} newCourt={newCourt} setNewCourt={setNewCourt} dispatch={dispatch} dbc={dbc} />
+        <NewMap position={position} setDetail={setDetail} searchText={searchText} navigate={navigate} newCourt={newCourt} setNewCourt={setNewCourt} dbc={dbc} />
     </PageWrap>
   )
 }

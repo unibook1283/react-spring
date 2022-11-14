@@ -2,33 +2,21 @@ import React from 'react'
 import { RenderAfterNavermapsLoaded, NaverMap, Marker } from 'react-naver-maps'
 
 export default class App extends React.Component {
-//   constructor(props) {
-//     super(props)
-//     this.state = {};
-//     // console.log(props)
-//   }
 
     render() {
 
-        const { position, data, setDetail, searchText, navigate, newCourt, setNewCourt, dispatch, dbc } = this.props;
-        // const navermaps = window.naver.maps;
+        const { position, setDetail, searchText, navigate, newCourt, setNewCourt, dbc } = this.props;
 
         const markerClicked = (elem) => {
             console.log(elem)
             setDetail(elem)
             navigate(`/map/${searchText}/${elem.id}`)
-            // console.log(this.mapRef.getCenterPoint());
         }
 
         const rightClick = (coord) => {
             console.log('test', coord)
             setNewCourt({ lat: coord._lat, lng: coord._lng })
         }
-
-        const dbcMarkerClicked = (elem) => {
-            // 고민좀 해보자.
-        }
-        
 
         return (
             <RenderAfterNavermapsLoaded
@@ -45,15 +33,6 @@ export default class App extends React.Component {
                     defaultZoom={12}
                     naverRef={ref => { this.mapRef = ref }}
                 >
-                    {data && data.map((elem, index) => {
-                        return (
-                            <Marker 
-                                key={index}
-                                position={{ lat: elem.y, lng: elem.x }}
-                                onClick={() => markerClicked(elem)}
-                            />
-                        )
-                    })}
                     {newCourt && (
                         <Marker
                             // icon={{
@@ -72,7 +51,6 @@ export default class App extends React.Component {
                             <Marker
                                 key={index}
                                 position={{ lat: elem.y, lng: elem.x }}
-                                // onClick={() => dbcMarkerClicked(elem)}
                                 onClick={() => markerClicked(elem)}
                             />
                         )
