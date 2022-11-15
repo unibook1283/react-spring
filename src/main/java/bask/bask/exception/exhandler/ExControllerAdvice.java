@@ -1,6 +1,7 @@
 package bask.bask.exception.exhandler;
 
 import bask.bask.exception.LoginException;
+import bask.bask.exception.RedundantFavoriteException;
 import bask.bask.exception.UnauthorizedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,15 @@ public class ExControllerAdvice {
         log.error("[exceptionHandler] ex", e);
         return new ErrorResult("LOGIN-EX", e.getMessage());
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler
+    public ErrorResult redundantFavoriteExHandler(RedundantFavoriteException e) {
+        log.error("[exceptionHandler] ex", e);
+        return new ErrorResult("RED-FAV-EX", e.getMessage());
+    }
+
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler

@@ -33,7 +33,6 @@ function FavoritePage() {
 	const [favoriteCourts, setFavoriteCourts] = useState([])
 
 	const getFav = async () => {
-		console.log('getFav')  // 이거 켜보면 계속 나옴. useEffect 때문인가. favorites값이 바뀌고 있다는건가.
 		try {
 			const data = await dispatch(getFavoriteCourts())
 			setFavoriteCourts(data.payload)

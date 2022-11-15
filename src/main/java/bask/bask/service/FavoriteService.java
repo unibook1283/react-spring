@@ -3,6 +3,7 @@ package bask.bask.service;
 import bask.bask.domain.Court;
 import bask.bask.domain.Favorite;
 import bask.bask.domain.Member;
+import bask.bask.exception.RedundantFavoriteException;
 import bask.bask.repository.CourtRepository;
 import bask.bask.repository.FavoriteRepository;
 import bask.bask.repository.MemberRepository;
@@ -25,6 +26,10 @@ public class FavoriteService {
     public Long favorite(Long memberId, Long courtId) {
         Member member = memberRepository.findOne(memberId);
         Court court = courtRepository.findOne(courtId);
+        List<Favorite> favorites = favoriteRepository.findFavoritesByMemberAndCourt(member, court);
+        if (!favorites.isEmpty()) {
+            throw new RedundantFavoriteException("이미 추가되어 있습니다.");
+        }
 
         Favorite favorite = Favorite.createFavorite(member, court);
         favoriteRepository.save(favorite);

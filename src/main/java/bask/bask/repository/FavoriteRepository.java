@@ -41,6 +41,13 @@ public class FavoriteRepository {
                 .getResultList();
     }
 
+    public List<Favorite> findFavoritesByMemberAndCourt(Member member, Court court) {
+        return em.createQuery("select f from Favorite f where f.member = :member and f.court = :court", Favorite.class)
+                .setParameter("member", member)
+                .setParameter("court", court)
+                .getResultList();
+    }
+
     public void delete(Favorite favorite) {
         em.remove(em.contains(favorite) ? favorite : em.merge(favorite));
     }

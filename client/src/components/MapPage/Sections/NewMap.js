@@ -8,7 +8,6 @@ export default class App extends React.Component {
         const { position, setDetail, searchText, navigate, newCourt, setNewCourt, dbc } = this.props;
 
         const markerClicked = (elem) => {
-            console.log(elem)
             setDetail(elem)
             navigate(`/map/${searchText}/${elem.id}`)
         }
