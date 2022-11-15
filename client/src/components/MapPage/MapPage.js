@@ -120,10 +120,9 @@ function MapPage() {
     
     const favoriteHandler = async () => {
         try {
-            const res = await dispatch(addFavorite(detail.id))
+            await dispatch(addFavorite(detail.id))
             alert('즐겨찾기에 추가되었습니다.')
         } catch (e) {
-            console.log(e)
             alert(e.response.data.message)
         }
     }
@@ -133,8 +132,6 @@ function MapPage() {
         console.log(searchText)
         try {
             const dbCourts = await dispatch(getSearchedCourt({searchText: searchText}))
-            console.log(dbCourts)
-            console.log(dbCourts.payload)
             setDbc(dbCourts.payload)
         } catch (e) {
             alert('Error')

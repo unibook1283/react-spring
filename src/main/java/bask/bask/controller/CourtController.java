@@ -1,6 +1,7 @@
 package bask.bask.controller;
 
 import bask.bask.domain.Court;
+import bask.bask.dto.SearchedCourtDto;
 import bask.bask.service.CourtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,11 +11,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 public class CourtController {
 
-//    @PostMapping("/api/court/new")
+    //    @PostMapping("/api/court/new")
 //    public String createCourt(@RequestBody Map<String, String> map) {
 //        map.forEach((key, value) -> {
 //            System.out.println(String.format("key : %s, value : %s, type : %s", key, value, value.getClass().getName()));
@@ -31,11 +33,18 @@ public class CourtController {
 
     // 이렇게 같이 하는거 괜찮나?
     @GetMapping("/api/court")
-    public List<Court> getCourts(@RequestParam(value = "dong", required = false) String dong) {
-        if (dong != null) return courtService.findCourtsByDong(dong);
+    public List<SearchedCourtDto> getCourts(@RequestParam(value = "dong", required = false) String dong) {
+        if (dong != null) {
+            return courtService.findCourtsByDong(dong)
+                    .stream()
+                    .map(court -> court.toSearchedCourtDto())
+                    .collect(Collectors.toList());
+        }
 
-        List<Court> courts = courtService.findCourts();
-        return courts;
+        return courtService.findCourts()
+                .stream()
+                .map(court -> court.toSearchedCourtDto())
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/api/court/{courtId}")

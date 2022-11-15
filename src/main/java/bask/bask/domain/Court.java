@@ -1,6 +1,7 @@
 package bask.bask.domain;
 
 import bask.bask.dto.FavoriteCourtDto;
+import bask.bask.dto.SearchedCourtDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -53,5 +54,10 @@ public class Court {
     public FavoriteCourtDto toFavoriteCourtDto(Long favoriteId) {
         return new FavoriteCourtDto(id, placeName, addressName, roadAddressName, placeUrl, phone,
                 goalPosts, floor, height, x, y, valid, favorites.size(), favoriteId);
+    }
+
+    public SearchedCourtDto toSearchedCourtDto() {
+        return new SearchedCourtDto(id, placeName, addressName, roadAddressName, placeUrl, phone,
+                goalPosts, floor, height, x, y, valid, favorites.size());
     }
 }

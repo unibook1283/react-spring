@@ -27,9 +27,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
             /**
              * 에러 처리
              */
-            throw new UnauthorizedException("미인증 사용자 요청");
-
-//            return false;
+            throw new UnauthorizedException("로그인 후 이용 가능합니다.");
         }
 
         return true;
