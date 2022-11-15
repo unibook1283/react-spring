@@ -3,6 +3,7 @@ package bask.bask;
 import bask.bask.domain.Court;
 import bask.bask.domain.Member;
 import bask.bask.service.CourtService;
+import bask.bask.service.FavoriteService;
 import bask.bask.service.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,8 @@ public class AddFavoriteTest {
     MemberService memberService;
     @Autowired
     CourtService courtService;
+    @Autowired
+    FavoriteService favoriteService;
     @Test
     public void addFavorite() {
         Member member = new Member();
@@ -30,10 +33,9 @@ public class AddFavoriteTest {
         memberService.join(member);
 
         Court court = new Court();
-        court.setName("court1");
+        court.setPlaceName("court1");
         courtService.saveCourt(court);
-
-        memberService.addFavoriteCourt(member.getId(), court.getId());
+        favoriteService.favorite(member.getId(), court.getId());
 
         Assertions.assertThat(court.getFavorites().size()).isEqualTo(1);
     }

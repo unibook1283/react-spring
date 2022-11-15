@@ -39,4 +39,4 @@ out/
 
 ### properties ###
 **/application.properties
-application-KAKAO-API-KEY.properties
+src/main/resources/application-KAKAO-API-KEY.properties
