@@ -13,6 +13,7 @@ import LoginPage from './components/LoginPage/LoginPage'
 import RegisterPage from './components/RegisterPage/RegisterPage'
 import NavBar from './components/NavBar/NavBar'
 import MapPage from './components/MapPage/MapPage'
+import FavoritePage from './components/FavoritePage/FavoritePage'
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 			<Route exact path="/map" element = {<MapPage/>}/>
             <Route exact path="/map/:address" element={<MapPage />} />
             <Route exact path="/map/:address/:id" element={<MapPage />} />
+            <Route exact path="/favorite" element={<FavoritePage />} />
 			</Routes>
 		</div>
 	</BrowserRouter>

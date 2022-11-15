@@ -5,7 +5,8 @@ export const LOGOUT_MEMBER = "logout_member"
 export const AUTH_MEMBER = "auth_member"
 
 // favorites
-export const GET_FAVORITES = "get_favorites" 
+export const GET_FAVORITE_COURTS = "get_favorite_courts"
+export const GET_FAVORITE_MEMBERS = "get_favorite_members" 
 export const DELETE_FAVORITE = "delete_favorite"
 export const ADD_FAVORITE = "add_favorite"
 

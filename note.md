@@ -25,5 +25,6 @@ public List<Favorite> findFavoriteByMember(Member member) {
 memberId를 받는게 맞나? Member를 받는게 맞나? 이게 계속 고민되네.
 controller의 입장을 생각해 보면 되는건가
 
-
 Transactional 공부하기
+
+favorite 중복 제거

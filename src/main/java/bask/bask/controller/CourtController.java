@@ -32,7 +32,6 @@ public class CourtController {
     // 이렇게 같이 하는거 괜찮나?
     @GetMapping("/api/court")
     public List<Court> getCourts(@RequestParam(value = "dong", required = false) String dong) {
-        System.out.println("dong = " + dong);
         if (dong != null) return courtService.findCourtsByDong(dong);
 
         List<Court> courts = courtService.findCourts();
@@ -61,7 +60,6 @@ public class CourtController {
 
     @PostMapping("/api/court/delete")
     public Court deleteCourt(@RequestBody Court court) {
-        System.out.println("court = " + court);
         courtService.removeCourt(court);
         return court;
     }

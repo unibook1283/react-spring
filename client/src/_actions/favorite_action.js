@@ -1,16 +1,27 @@
 import axios from 'axios'
 import {
-    GET_FAVORITES,
+    GET_FAVORITE_COURTS,
+    GET_FAVORITE_MEMBERS,
     DELETE_FAVORITE,
     ADD_FAVORITE
 } from './types'
 
-export function getFavorites() {
-    const request = axios.get('/api/favorites')
+export function getFavoriteCourts() {
+    const request = axios.get('/api/favorites/court')
         .then(response => response.data)
 
     return {
-        type: GET_FAVORITES,
+        type: GET_FAVORITE_COURTS,
+        payload: request
+    }
+}
+
+export function getFavoriteMembers(dataToSubmit) {
+    const request = axios.get('/api/favorites/member/' + dataToSubmit)
+        .then(response => response.data)
+
+    return {
+        type: GET_FAVORITE_MEMBERS,
         payload: request
     }
 }

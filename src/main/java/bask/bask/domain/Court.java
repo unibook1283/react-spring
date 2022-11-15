@@ -1,5 +1,6 @@
 package bask.bask.domain;
 
+import bask.bask.dto.FavoriteCourtDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 public class Court {
 
@@ -22,7 +24,8 @@ public class Court {
         this.y = y;
     }
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "COURT_ID")
     private Long id;
 
@@ -46,4 +49,9 @@ public class Court {
     private double x;
     private double y;
     private Boolean valid;  // 관리자가 승인하기 전에는 valid가 false임.
+
+    public FavoriteCourtDto toFavoriteCourtDto(Long favoriteId) {
+        return new FavoriteCourtDto(id, placeName, addressName, roadAddressName, placeUrl, phone,
+                goalPosts, floor, height, x, y, valid, favorites.size(), favoriteId);
+    }
 }

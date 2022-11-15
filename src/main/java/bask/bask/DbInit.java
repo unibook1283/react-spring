@@ -1,18 +1,16 @@
 package bask.bask;
 
 import bask.bask.domain.Court;
-import bask.bask.dto.CourtDto;
+import bask.bask.dto.KakaoCourtDto;
 import bask.bask.dto.JsonResponse;
 import bask.bask.service.CourtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
 @Component
@@ -40,7 +38,7 @@ public class DbInit {
                         .bodyToMono(JsonResponse.class);
 
                 JsonResponse block = objectMono.block();    // 다 읽으면 여기서 예외가 터지는데
-                CourtDto[] courts = block.getDocuments();
+                KakaoCourtDto[] courts = block.getDocuments();
                 Arrays.stream(courts).forEach(c -> {
                     Court court = c.toCourt();
                     if (!courtService.isDuplicate(court)) {
