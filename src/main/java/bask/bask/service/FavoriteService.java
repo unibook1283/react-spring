@@ -39,9 +39,7 @@ public class FavoriteService {
 
     @Transactional
     public void deleteFavoriteByCourtId(Long courtId) {
-        System.out.println("favoriteId = " + courtId);
         Favorite favorite = favoriteRepository.findOne(courtId);
-        System.out.println("favorite = " + favorite);
         favoriteRepository.delete(favorite);
     }
 
