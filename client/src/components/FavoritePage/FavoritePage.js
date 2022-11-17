@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Auth from '../../hoc/auth'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { getFavoriteCourts, deleteFavorite } from '../../_actions/favorite_action'
 import styled from 'styled-components'
 import { List, ListItem, ListItemText, ListItemButton, Divider, Chip, IconButton, Link } from '@mui/material';
@@ -29,23 +30,26 @@ const Nothing = styled.div`
 
 function FavoritePage() {
 	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
 	const [favoriteCourts, setFavoriteCourts] = useState([])
 
 	const getFav = async () => {
 		try {
+			// 로그인 안 한 상태로 이 페이지에 들어가면 에러 메시지가 두 번 나옴.
+			// 왜 이러지?
 			const data = await dispatch(getFavoriteCourts())
 			setFavoriteCourts(data.payload)
 		} catch (e) {
-			alert('Error')
+			alert(e.response.data.message)
 		}
 	}
 	useEffect(() => {
 		getFav()
 	}, [])
 
-	const selectHandler = () => {
-		alert('준비중')
+	const selectHandler = (elem) => {
+		navigate('/court/'+elem.id)
 	}
 
 	const deleteHandler = async (elem) => {
@@ -75,7 +79,7 @@ function FavoritePage() {
 				<div key={index}>
 					<FavoriteElement>
 					<ListItem>
-						<ListItemButton onClick={selectHandler}>
+						<ListItemButton onClick={() => selectHandler(elem)}>
 						<ListItemText primary={elem.placeName} secondary={elem.roadAddressName}/>
 						<Chip icon={<PeopleIcon />} label={elem.favoriteMemberCnt} />
 						

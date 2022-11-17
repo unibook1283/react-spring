@@ -32,9 +32,6 @@ function LandingPage() {
 		<br />
 		<Link to='/favorite'>favorite</Link>
 		<br />
-		navbar 만들어보자.
-		<br/>
-		그리고 스프링 시큐리티 하던 하자.
 		</PageWrap>
 	)
 }
