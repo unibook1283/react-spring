@@ -44,6 +44,10 @@ function PostPage() {
         setContent(e.target.value)
     }
 
+    const cancelHandler = () => {
+        navigate('/court/' + courtId)
+    }
+
     const saveHandler = async () => {
         let body = {
             courtId,
@@ -71,7 +75,8 @@ function PostPage() {
                     <TextField id="outlined-basic" label="내용" variant="outlined" fullWidth multiline rows={10} onChange={contentChanged}/>
                 </Content>
                 <ButtonWrap>
-                    <Button sx={{ mt: 2 }} onClick={saveHandler}>저장</Button>
+                    <Button variant="contained" sx={{ mt: 2, mx: 1 }} onClick={saveHandler}>저장</Button>
+                    <Button variant="outlined" sx={{ mt: 2 }} onClick={cancelHandler}>취소</Button>
                 </ButtonWrap>
             </Wrapper>
         </PageWrap>
