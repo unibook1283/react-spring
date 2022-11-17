@@ -26,7 +26,7 @@ public class CourtServiceTest {
     @Test
     public void 코트추가() {
         Court court = new Court();
-        court.setName("qwer");
+        court.setPlaceName("qwer");
 
         courtService.saveCourt(court);
 
