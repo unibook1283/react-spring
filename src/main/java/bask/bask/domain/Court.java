@@ -33,6 +33,9 @@ public class Court {
     @OneToMany(mappedBy = "court")
     private List<Favorite> favorites = new ArrayList<Favorite>();
 
+    @OneToMany(mappedBy = "court")
+    private List<Post> posts = new ArrayList<Post>();
+
     @Column(name = "PLACE_NAME")
     private String placeName;
 

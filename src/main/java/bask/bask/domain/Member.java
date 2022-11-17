@@ -28,6 +28,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Favorite> favorites = new ArrayList<Favorite>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<Post>();
+
     private String name;
     private String email;
     private String phoneNumber;
