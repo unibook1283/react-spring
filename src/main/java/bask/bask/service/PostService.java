@@ -8,10 +8,12 @@ import bask.bask.repository.MemberRepository;
 import bask.bask.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostService {
 
@@ -19,6 +21,7 @@ public class PostService {
     final private MemberRepository memberRepository;
     final private CourtRepository courtRepository;
 
+    @Transactional
     public Long savePost(Post post) {
         // favorite은 service에서 create하는데 post는 controller에서 create해서 보내게 구현함. ㄱㅊ?
         postRepository.save(post);

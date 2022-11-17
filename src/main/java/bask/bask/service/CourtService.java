@@ -9,12 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class CourtService {
 
     @Autowired
     CourtRepository courtRepository;
 
+    @Transactional
     public Long saveCourt(Court court) {
         courtRepository.save(court);
         return court.getId();
@@ -28,6 +29,7 @@ public class CourtService {
         return courtRepository.findOne(courtId);
     }
 
+    @Transactional
     public Long removeCourt(Court court) {
         courtRepository.delete(court);
         return court.getId();

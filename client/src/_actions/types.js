@@ -16,3 +16,6 @@ export const GET_COURT = "get_court"
 export const DELETE_COURT = "delete_court"
 export const UPDATE_COURT = "update_court"
 export const SEARCHED_COURT = "searched_court"
+
+// post
+export const ADD_POST = "add_post"

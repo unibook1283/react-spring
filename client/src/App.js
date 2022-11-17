@@ -12,6 +12,8 @@ import NavBar from './components/NavBar/NavBar'
 import MapPage from './components/MapPage/MapPage'
 import FavoritePage from './components/FavoritePage/FavoritePage'
 import CourtPage from './components/CourtPage/CourtPage'
+import NewPostPage from './components/Post/NewPostPage/NewPostPage'
+import PostDetailPage from './components/Post/PostDetailPage/PostDetailPage'
 
 function App() {
 	return (
@@ -27,7 +29,9 @@ function App() {
             <Route exact path="/map/:address" element={<MapPage />} />
             <Route exact path="/map/:address/:id" element={<MapPage />} />
             <Route exact path="/favorite" element={<FavoritePage />} />
-			<Route exact path="/court/:id" element={<CourtPage />} />
+			<Route exact path="/court/:courtId" element={<CourtPage />} />
+			<Route exact path="/post/:courtId/new" element={<NewPostPage />} />
+			<Route exact path="/post/:courtId/detail/:postId" element={<PostDetailPage />} />
 			</Routes>
 		</div>
 	</BrowserRouter>

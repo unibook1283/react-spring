@@ -4,13 +4,13 @@ import styled from 'styled-components'
 import Auth from '../../hoc/auth'
 import { List, ListItem, ListItemText, ListItemButton, Divider, Chip, IconButton, Link, Button } from '@mui/material';
 
-const All = styled.div`
+const PageWrap = styled.div`
     display: flex;
     flex-direction:  column;
     align-items: center;
 `
 
-const PageWrap = styled.div`
+const ContentWrap = styled.div`
     width: 800px;
     background: blue;
 `
@@ -39,6 +39,7 @@ const Buttons = styled.div`
 `
 
 function CourtPage() {
+    const navigate = useNavigate()
     let { courtId } = useParams()
 
     const [posts, setPosts] = useState([])
@@ -49,12 +50,12 @@ function CourtPage() {
 	}
 
     const newPost = () => {
-
+        navigate("/post/" + courtId + "/new")
     }
 
     return (
-        <All>
-            <PageWrap>
+        <PageWrap>
+            <ContentWrap>
                 <CourtDescription>
                     <h1>반포농구장</h1>
                     <h3>솔샘로 174</h3>
@@ -79,8 +80,8 @@ function CourtPage() {
                         )
                     })}
                 </Board>
-            </PageWrap>
-        </All>
+            </ContentWrap>
+        </PageWrap>
         
         
     )

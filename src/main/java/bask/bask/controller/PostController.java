@@ -24,7 +24,7 @@ public class PostController {
     final private PostService postService;
 
     @PostMapping("/api/post/add")
-    public void savePost(@RequestBody PostDto postDto, HttpServletRequest request) {
+    public Long savePost(@RequestBody PostDto postDto, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Long memberId = (Long) session.getAttribute(SessionConst.LOGIN_MEMBER);
         Member member = memberService.findOne(memberId);
@@ -32,6 +32,7 @@ public class PostController {
         Court court = courtService.findOne(postDto.getCourtId());
 
         Post post = Post.createPost(member, court, postDto.getTitle(), postDto.getContent());
-        postService.savePost(post);
+        Long postId = postService.savePost(post);
+        return postId;
     }
 }
