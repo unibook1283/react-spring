@@ -5,13 +5,12 @@ import Auth from '../../hoc/auth'
 import { List, ListItem, ListItemText, ListItemButton, Divider, Chip, IconButton, Link, Button } from '@mui/material';
 
 const All = styled.div`
-display: flex;
+    display: flex;
     flex-direction:  column;
     align-items: center;
 `
 
 const PageWrap = styled.div`
-    
     width: 800px;
     background: blue;
 `
@@ -40,7 +39,7 @@ const Buttons = styled.div`
 `
 
 function CourtPage() {
-    let { id } = useParams()
+    let { courtId } = useParams()
 
     const [posts, setPosts] = useState([])
 
@@ -48,6 +47,10 @@ function CourtPage() {
     const selectHandler = (elem) => {
 		// navigate('/court/'+elem.id)
 	}
+
+    const newPost = () => {
+
+    }
 
     return (
         <All>
@@ -57,7 +60,7 @@ function CourtPage() {
                     <h3>솔샘로 174</h3>
                 </CourtDescription>
                 <Buttons>
-                    <Button>새 글 쓰기</Button>
+                    <Button onClick={newPost}>새 글 쓰기</Button>
                 </Buttons>
                 <Board>
                     {posts.map((elem, index) => {
