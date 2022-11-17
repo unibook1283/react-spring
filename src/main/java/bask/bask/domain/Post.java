@@ -26,6 +26,9 @@ public class Post {
     @JoinColumn(name = "COURT_ID")
     private Court court;
 
+    private String title;
+    private String content;
+
     //== 연관관계 메서드 ==//
     public void setMember(Member member) {
         this.member = member;
@@ -37,10 +40,12 @@ public class Post {
         court.getPosts().add(this);
     }
 
-    public static Post createPost(Member member, Court court) {
+    public static Post createPost(Member member, Court court, String title, String content) {
         Post post = new Post();
         post.setMember(member);
         post.setCourt(court);
+        post.setTitle(title);
+        post.setContent(content);
         return post;
     }
 }
