@@ -17,8 +17,8 @@ export function addCourt(dataToSubmit) {
     }
 }
 
-export function getUnvalidCourt() {
-    const request = axios.get('/api/courts/unvalid')
+export function getCourt(dataToSubmit) {
+    const request = axios.get('/api/court/' + dataToSubmit)
         .then(response => response.data)
 
     return {

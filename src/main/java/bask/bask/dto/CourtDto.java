@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchedCourtDto {
+public class CourtDto {
 
     @Id
     private Long id;

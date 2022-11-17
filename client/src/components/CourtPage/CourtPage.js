@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Auth from '../../hoc/auth'
 import { List, ListItem, ListItemText, ListItemButton, Divider, Chip, IconButton, Link, Button } from '@mui/material';
 import { getPosts } from '../../_actions/post_action'
+import { getCourt } from '../../_actions/court_action'
 
 const PageWrap = styled.div`
     display: flex;
@@ -26,6 +27,11 @@ const CourtDescription = styled.div`
     }
 `
 
+const AddressName = styled.div`
+    display: flex;
+    align-items: center;
+`
+
 const Board = styled.div`
 
 `
@@ -44,10 +50,12 @@ function CourtPage() {
     const dispatch = useDispatch()
     let { courtId } = useParams()
 
+    const [court, setCourt] = useState({})
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
         getPostsOfCourt()
+        getCourtFromDb()
     }, [])
 
     const getPostsOfCourt = async () => {
@@ -56,6 +64,15 @@ function CourtPage() {
             setPosts(data.payload)
         } catch (e) {
             alert('Error')
+        }
+    }
+
+    const getCourtFromDb = async () => {
+        try {
+            const data = await dispatch(getCourt(courtId))
+            setCourt(data.payload)
+        } catch (e) {
+			alert(e.response.data.message)
         }
     }
     
@@ -67,18 +84,27 @@ function CourtPage() {
         navigate("/post/" + courtId + "/new")
     }
 
+    const showMap = () => {
+        alert('준비중')
+    }
+
     return (
         <PageWrap>
             <ContentWrap>
                 <CourtDescription>
-                    <h1>반포농구장</h1>
-                    <h3>솔샘로 174</h3>
+                    <h1>{court.placeName}</h1>
+                    <AddressName>
+                        <h3>{court.addressName}</h3>
+                        <Button variant="outlined" sx={{ height: 30, mx: 2 }} onClick={showMap}>지도에서 보기</Button>
+                    </AddressName>
                 </CourtDescription>
                 <Buttons>
                     <Button variant="contained" onClick={newPost}>새 글 쓰기</Button>
                 </Buttons>
+                
                 <Board>
-                    {posts.map((elem, index) => {
+                    
+                    {posts && posts.map((elem, index) => {
                         return (
                             <div key={index}>
                                 <Post>
@@ -94,6 +120,9 @@ function CourtPage() {
                         )
                     })}
                 </Board>
+                {(posts.length === 0) && 
+                    <h3>아직 글이 없습니다.</h3>
+                }
             </ContentWrap>
         </PageWrap>
         
