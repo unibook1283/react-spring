@@ -129,7 +129,6 @@ function MapPage() {
 
     
     const fetchDbCourts = async () => {
-        console.log(searchText)
         try {
             const dbCourts = await dispatch(getSearchedCourt({searchText: searchText}))
             setDbc(dbCourts.payload)

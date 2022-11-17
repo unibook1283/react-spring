@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import Auth from '../../hoc/auth'
 import { List, ListItem, ListItemText, ListItemButton, Divider, Chip, IconButton, Link, Button } from '@mui/material';
+import { getPosts } from '../../_actions/post_action'
 
 const PageWrap = styled.div`
     display: flex;
@@ -12,7 +14,6 @@ const PageWrap = styled.div`
 
 const ContentWrap = styled.div`
     width: 800px;
-    background: blue;
 `
 
 const CourtDescription = styled.div`
@@ -20,7 +21,6 @@ const CourtDescription = styled.div`
     flex-direction: column;
 	justify-content: center;
     height: 200px;
-    background: lightblue;
     h3 {
         font-weight: 300;
     }
@@ -35,18 +35,32 @@ const Post = styled.div`
 `
 
 const Buttons = styled.div`
-
+    display: inline-block;
+    float: right;
 `
 
 function CourtPage() {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     let { courtId } = useParams()
 
     const [posts, setPosts] = useState([])
 
+    useEffect(() => {
+        getPostsOfCourt()
+    }, [])
 
+    const getPostsOfCourt = async () => {
+        try {
+            const data = await dispatch(getPosts(courtId))
+            setPosts(data.payload)
+        } catch (e) {
+            alert('Error')
+        }
+    }
+    
     const selectHandler = (elem) => {
-		// navigate('/court/'+elem.id)
+		navigate('/post/' + courtId + '/detail/' + elem.postId)
 	}
 
     const newPost = () => {
@@ -61,7 +75,7 @@ function CourtPage() {
                     <h3>솔샘로 174</h3>
                 </CourtDescription>
                 <Buttons>
-                    <Button onClick={newPost}>새 글 쓰기</Button>
+                    <Button variant="contained" onClick={newPost}>새 글 쓰기</Button>
                 </Buttons>
                 <Board>
                     {posts.map((elem, index) => {
@@ -70,7 +84,7 @@ function CourtPage() {
                                 <Post>
                                     <ListItem>
                                         <ListItemButton onClick={() => selectHandler(elem)}>
-                                            {/* <ListItemText primary={elem.placeName} secondary={elem.roadAddressName}/> */}
+                                            <ListItemText primary={elem.title} secondary={elem.content}/>
                                         
                                         </ListItemButton>
                                     </ListItem>

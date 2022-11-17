@@ -48,8 +48,6 @@ export function updateCourt(dataToSubmit) {
 }
 
 export function getSearchedCourt(dataToSubmit) {
-    console.log(dataToSubmit.searchText)
-    console.log('/api/court?dong=' + dataToSubmit.searchText)
     const request = axios.get('/api/court?dong=' + dataToSubmit.searchText, dataToSubmit)
         .then(response => response.data)
 

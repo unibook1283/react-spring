@@ -1,5 +1,6 @@
 package bask.bask.domain;
 
+import bask.bask.dto.PostDto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -47,5 +48,9 @@ public class Post {
         post.setTitle(title);
         post.setContent(content);
         return post;
+    }
+
+    public PostDto toPostDto(Long courtId) {
+        return new PostDto(id, courtId, title, content);
     }
 }
