@@ -3,6 +3,7 @@ export const LOGIN_MEMBER = "login_member"
 export const REGISTER_MEMBER = "register_member"
 export const LOGOUT_MEMBER = "logout_member"
 export const AUTH_MEMBER = "auth_member"
+export const GET_MEMBER = "get_member"
 
 // favorites
 export const GET_FAVORITE_COURTS = "get_favorite_courts"

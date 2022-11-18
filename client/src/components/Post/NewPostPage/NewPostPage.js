@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { TextField, Button } from '@mui/material';
 import { addPost } from '../../../_actions/post_action';
+import Auth from '../../../hoc/auth'
 
 const PageWrap = styled.div`
     display: flex;
@@ -83,4 +84,4 @@ function PostPage() {
     )
 }
 
-export default PostPage
+export default Auth(PostPage, true)

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { getPost } from '../../../_actions/post_action';
+import { getPost } from '../../../_actions/post_action'
+import { getMember } from '../../../_actions/member_action'
+import Auth from '../../../hoc/auth'
 
 const PageWrap = styled.div`
     display: flex;
@@ -19,7 +21,7 @@ const Title = styled.div`
 `
 
 const Content = styled.div`
-
+	margin-top: 20px;
 `
 
 function PostDetailPage() {
@@ -27,8 +29,7 @@ function PostDetailPage() {
 	const dispatch = useDispatch()
     let { courtId, postId } = useParams()
 
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
+	const [post, setPost] = useState({})
 
 	useEffect(() => {
 		getPostFromDb()
@@ -41,8 +42,7 @@ function PostDetailPage() {
 		}
 		try {
 			const res = await dispatch(getPost(body))
-			setTitle(res.payload.title)
-			setContent(res.payload.content)
+			setPost(res.payload)
 		} catch (e) {
 			alert(e.response.data.message)
 		}
@@ -52,14 +52,17 @@ function PostDetailPage() {
         <PageWrap>
             <Wrapper>
                 <Title>
-                    <h2>{title}</h2>
+                    <h2>{post.title}</h2>
+					{'작성자 : ' + post.memberName}
+					<br/>
+					{'작성일 : ' + post.createdDate?.substring(0, 10) + ' ' + post.createdDate?.substring(11, 16)}
                 </Title>
                 <Content>
-                    <h3>{content}</h3>
+                    {post.content}
                 </Content>
             </Wrapper>
         </PageWrap>
     )
 }
 
-export default PostDetailPage
+export default Auth(PostDetailPage, true)

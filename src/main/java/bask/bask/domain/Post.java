@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -51,6 +51,6 @@ public class Post {
     }
 
     public PostDto toPostDto(Long courtId) {
-        return new PostDto(id, courtId, title, content);
+        return new PostDto(id, member.getId(), member.getName(), courtId, title, content, getCreatedDate(), getModifiedDate());
     }
 }

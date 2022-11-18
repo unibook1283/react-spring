@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,12 +41,13 @@ public class PostController {
     public List<PostDto> findPostsByCourtId(@PathVariable Long courtId) {
         List<PostDto> posts = postService.findPostsByCourtId(courtId)
                 .stream()
+                .sorted(Comparator.comparing(Post::getCreatedDate).reversed())
                 .map(post -> post.toPostDto(courtId))
                 .collect(Collectors.toList());
         return posts;
     }
 
-    @GetMapping("/api/post/{courtId}/{postId}")
+    @GetMapping("/api/post/{courtId}/id/{postId}")
     public PostDto findPostByPostId(@PathVariable Long courtId, @PathVariable Long postId) {
         Post post = postService.findOne(postId);
         return post.toPostDto(courtId);

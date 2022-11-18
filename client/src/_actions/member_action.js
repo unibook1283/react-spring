@@ -3,7 +3,8 @@ import {
     LOGIN_MEMBER,
     REGISTER_MEMBER,
     LOGOUT_MEMBER,
-    AUTH_MEMBER
+    AUTH_MEMBER,
+    GET_MEMBER
 } from './types'
 
 export function loginMember(dataToSubmit) {
@@ -42,6 +43,16 @@ export function auth() {
 
     return {
         type: AUTH_MEMBER,
+        payload: request
+    }
+}
+
+export function getMember(dataToSubmit) {
+    const request = axios.get('/api/members/' + dataToSubmit)
+        .then(response => response.data)
+
+    return {
+        type: GET_MEMBER,
         payload: request
     }
 }

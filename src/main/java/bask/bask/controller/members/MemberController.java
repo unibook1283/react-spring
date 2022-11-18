@@ -4,16 +4,10 @@ import bask.bask.controller.SessionConst;
 import bask.bask.dto.AuthDto;
 import bask.bask.dto.MemberForm;
 import bask.bask.domain.Member;
-import bask.bask.exception.UnauthorizedException;
 import bask.bask.service.MemberService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,10 +26,6 @@ public class MemberController {
     public Long create(@Valid @RequestBody MemberForm memberForm) {
 
         Member member = memberForm.toMember();
-        System.out.println("member.getName() = " + member.getName());
-        System.out.println("member.getEmail() = " + member.getEmail());
-        System.out.println("member.getPhoneNumber() = " + member.getPhoneNumber());
-        System.out.println("member.getPassword() = " + member.getPassword());
         memberService.join(member);
         return member.getId();
     }
@@ -56,4 +46,5 @@ public class MemberController {
 //
 //        response.getWriter().write(result);
     }
+
 }

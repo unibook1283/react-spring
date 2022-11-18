@@ -2,7 +2,8 @@ import {
     LOGIN_MEMBER,
     REGISTER_MEMBER,
     LOGOUT_MEMBER,
-    AUTH_MEMBER
+    AUTH_MEMBER,
+    GET_MEMBER
 } from '../_actions/types'
 
 export default function (state = {}, action) {
@@ -14,6 +15,8 @@ export default function (state = {}, action) {
         case LOGOUT_MEMBER:
             return { ...state, data: action.payload }
         case AUTH_MEMBER:
+            return { ...state, data: action.payload }
+        case GET_MEMBER:
             return { ...state, data: action.payload }
         default:
             return state

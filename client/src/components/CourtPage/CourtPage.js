@@ -110,7 +110,7 @@ function CourtPage() {
                                 <Post>
                                     <ListItem>
                                         <ListItemButton onClick={() => selectHandler(elem)}>
-                                            <ListItemText primary={elem.title} secondary={elem.content}/>
+                                            <ListItemText primary={elem.title} secondary={elem.createdDate.substring(0, 10)}/>
                                         
                                         </ListItemButton>
                                     </ListItem>

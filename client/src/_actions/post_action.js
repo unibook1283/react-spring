@@ -26,7 +26,7 @@ export function getPosts(dataToSubmit) {
 }
 
 export function getPost(dataToSubmit) {
-    const request = axios.get('/api/post/' + dataToSubmit.courtId + '/' + dataToSubmit.postId)
+    const request = axios.get('/api/post/' + dataToSubmit.courtId + '/id/' + dataToSubmit.postId)
         .then(response => response.data)
 
     return {
