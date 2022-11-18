@@ -45,4 +45,10 @@ public class PostController {
         return posts;
     }
 
+    @GetMapping("/api/post/{courtId}/{postId}")
+    public PostDto findPostByPostId(@PathVariable Long courtId, @PathVariable Long postId) {
+        Post post = postService.findOne(postId);
+        return post.toPostDto(courtId);
+    }
+
 }

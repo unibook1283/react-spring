@@ -19,4 +19,5 @@ export const SEARCHED_COURT = "searched_court"
 
 // post
 export const ADD_POST = "add_post"
+export const GET_POSTS = "get_posts"
 export const GET_POST = "get_post"
